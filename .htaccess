@@ -1,0 +1,11 @@
+RewriteOptions inherit
+RewriteEngine On
+
+# Remove trailing slash if present, except for specific directories or files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Add .php extension if the file exists
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [NC,L]
